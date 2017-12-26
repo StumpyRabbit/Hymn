@@ -49,7 +49,6 @@ import club.callistohouse.raven.remote.MurmurOutputStream;
 import club.callistohouse.raven.scope.Scope;
 import club.callistohouse.session.Session;
 import club.callistohouse.session.Session.DataReceived;
-import club.callistohouse.utils.events.Listener;
 
 public class MurmurTerminal {
 	private static Logger log = Logger.getLogger(MurmurTerminal.class);

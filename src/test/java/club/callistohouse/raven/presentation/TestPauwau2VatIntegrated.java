@@ -52,7 +52,6 @@ import club.callistohouse.raven.Ref;
 import club.callistohouse.raven.exceptions.NotResolvedException;
 import club.callistohouse.raven.presentation.utils.GalaxyObject;
 import club.callistohouse.utils.events.EventEngine;
-import club.callistohouse.utils.events.Listener;
 
 public class TestPauwau2VatIntegrated extends AbstractPauwauTest {
 

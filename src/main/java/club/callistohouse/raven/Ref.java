@@ -41,7 +41,6 @@ import club.callistohouse.raven.refs.RefImpl;
 import club.callistohouse.raven.refs.RefUtil;
 import club.callistohouse.raven.vat.MessageSend;
 import club.callistohouse.raven.vat.Vat;
-import club.callistohouse.utils.events.Listener;
 
 public class Ref {
 	private RefImpl refImpl;
