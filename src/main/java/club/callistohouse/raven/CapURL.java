@@ -41,7 +41,7 @@ import java.net.InetSocketAddress;
 
 import club.callistohouse.session.SessionIdentity;
 
-public class PauwauUrl {
+public class CapURL {
 
 	private static String getSchema() { return "murmur"; }
 
@@ -63,12 +63,12 @@ public class PauwauUrl {
 	private SessionIdentity whisperId;
 	private BigInteger swissNumber;
 
-	public PauwauUrl(SessionIdentity whisperId, BigInteger swissNumber) {
+	public CapURL(SessionIdentity whisperId, BigInteger swissNumber) {
 		this.whisperId = whisperId;
 		this.swissNumber = swissNumber;
 	}
 
-	public PauwauUrl(String urlString) {
+	public CapURL(String urlString) {
 		validateHeader(urlString);
 		String content = urlString.substring(9, urlString.length());
 		String[] fields = content.split("/");

@@ -41,7 +41,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import club.callistohouse.raven.PauwauUrl;
+import club.callistohouse.raven.CapURL;
 import club.callistohouse.raven.Ref;
 import club.callistohouse.raven.presentation.utils.GalaxyObject;
 
@@ -51,7 +51,7 @@ public class TestPauwau2VatException extends AbstractPauwauTest {
 	public void testTwoVats() throws Exception {
 		try {
 			setup2Introducers();
-			PauwauUrl url = registerObject(pauwau1, new GalaxyObject());
+			CapURL url = registerObject(pauwau1, new GalaxyObject());
 			Ref testObject = realizeRef(pauwau2, url);
 
 			Ref answer1 = testObject.redirectMessage("getTheAnswerException");

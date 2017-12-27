@@ -45,14 +45,14 @@ import club.callistohouse.session.SessionIdentity;
 public class SturdyRef {
 
 	private Locator locator;
-	private PauwauUrl url;
+	private CapURL url;
 
-	public SturdyRef(PauwauUrl id, Locator locator) {
+	public SturdyRef(CapURL id, Locator locator) {
 		this.locator = locator;
 		this.url = id;
 	}
 
-	public PauwauUrl asUrl() { return url; }
+	public CapURL asUrl() { return url; }
 	public SessionIdentity getSessionId() { return url.getSessionId(); }
 	public String getVatId() { return getSessionId().getVatId(); }
 	public BigInteger getSwissNumber() { return url.getSwissNumber(); }

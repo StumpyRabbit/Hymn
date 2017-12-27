@@ -46,7 +46,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import club.callistohouse.raven.PassByCopy;
-import club.callistohouse.raven.PauwauUrl;
+import club.callistohouse.raven.CapURL;
 import club.callistohouse.raven.ReactorInterface;
 import club.callistohouse.raven.Ref;
 import club.callistohouse.raven.exceptions.NotResolvedException;
@@ -68,10 +68,10 @@ public class TestPauwau2VatIntegrated extends AbstractPauwauTest {
 	@Test
 	public void testTwoVats() throws Exception {
 		try {
-			PauwauUrl url = registerObject(pauwau1, new GalaxyObject());
+			CapURL url = registerObject(pauwau1, new GalaxyObject());
 			Ref testObject = realizeRef(pauwau2, url);
 			Ref answer1 = testObject.redirectMessage("getTheAnswer");
-			log.info("The value is: " + answer1.getReceiver(2000));
+			log.info("The value is: " + answer1.getReceiver(5000));
 			assertEquals(42, answer1.getReceiver(1000));
 		} catch(Exception e) {
 			log.debug(e);
@@ -81,7 +81,7 @@ public class TestPauwau2VatIntegrated extends AbstractPauwauTest {
 	public boolean whenReactorTriggered = false;
 	@Test
 	public void testTwoVatsWithWhen() throws Exception {
-		PauwauUrl url = registerObject(pauwau1, new GalaxyObject());
+		CapURL url = registerObject(pauwau1, new GalaxyObject());
 		final Ref answer = realizeRef(pauwau2, url).redirectMessage("getTheAnswer").redirectMessage("hashCode");
 		answer.whenResolved(buildWhenReactor());
 		assertEquals(42, answer.getReceiver(3000));
@@ -106,7 +106,7 @@ public class TestPauwau2VatIntegrated extends AbstractPauwauTest {
 		try {
 			log.info("starting Two Vat Event test");
 			TestObjectProducer testProducer = new TestObjectProducer();
-			PauwauUrl url = pauwau1.makeOrReturnUrl(testProducer, true);
+			CapURL url = pauwau1.makeOrReturnUrl(testProducer, true);
 			Ref testObjectRef = pauwau2.sturdy(url).liveRef();
 
 			testObjectRef.addListener( 

@@ -42,7 +42,7 @@ import static org.junit.Assert.assertTrue;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
-import club.callistohouse.raven.PauwauUrl;
+import club.callistohouse.raven.CapURL;
 import club.callistohouse.raven.Ref;
 import club.callistohouse.raven.presentation.utils.GalaxyObject;
 
@@ -53,8 +53,8 @@ public class TestPauwau3Vat extends AbstractPauwauTest {
 	public void testThreeVats() throws Exception {
 		try {
 			setup3Introducers();
-			PauwauUrl aliceUrl = registerObject(pauwau1, new GalaxyObject());
-			PauwauUrl bobUrl = registerObject(pauwau2, new GalaxyObject());
+			CapURL aliceUrl = registerObject(pauwau1, new GalaxyObject());
+			CapURL bobUrl = registerObject(pauwau2, new GalaxyObject());
 
 			final Ref alice = (Ref) realizeRef(pauwau3, aliceUrl);
 			final Ref bob = (Ref) realizeRef(pauwau3, bobUrl);

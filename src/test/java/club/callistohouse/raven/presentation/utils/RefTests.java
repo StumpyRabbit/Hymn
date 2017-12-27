@@ -43,7 +43,7 @@ import org.apache.log4j.BasicConfigurator;
 import org.junit.Before;
 import org.junit.Test;
 
-import club.callistohouse.raven.PauwauUrl;
+import club.callistohouse.raven.CapURL;
 import club.callistohouse.raven.Ref;
 import club.callistohouse.raven.exceptions.NotResolvedException;
 import club.callistohouse.raven.refs.RefUtil;
@@ -166,7 +166,7 @@ public class RefTests {
 
 	@Test
 	public void testMurmorUrl() {
-		PauwauUrl id = new PauwauUrl("murmur://localhost:4200/nick/0F0A080410/0F0A080410");
+		CapURL id = new CapURL("murmur://localhost:4200/nick/0F0A080410/0F0A080410");
 		assertEquals("localhost", id.getSessionId().getSocketAddress().getHostName());
 		assertEquals(4200, id.getSessionId().getSocketAddress().getPort());
 		assertEquals("0F0A080410", id.getSessionId().getVatId());

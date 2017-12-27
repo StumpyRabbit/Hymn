@@ -52,7 +52,7 @@ import club.callistohouse.raven.scope.Locator;
 import club.callistohouse.raven.tables.SwissTable;
 import club.callistohouse.session.SessionIdentity;
 
-public class Introducer {
+public class Raven {
 
 	protected SessionIdentity localId;
 	protected SwissTable swissTable;
@@ -60,15 +60,15 @@ public class Introducer {
 	protected File persistentObjectsFile;
 	protected Map<String,Object> persistentObjects = new HashMap<String, Object>();
 
-	public Introducer(String nickname, int port) throws UnknownHostException {
+	public Raven(String nickname, int port) throws UnknownHostException {
 		this(new SessionIdentity(nickname, port));
 	}
-	public Introducer(SessionIdentity id) {
+	public Raven(SessionIdentity id) {
 		this.localId = id;
 		this.swissTable = new SwissTable();
 	}
 
-	public Introducer onTheAir() throws FileNotFoundException, ClassNotFoundException, IOException {
+	public Raven onTheAir() throws FileNotFoundException, ClassNotFoundException, IOException {
 		if (locator == null) {
 			locator = new Locator(new MurmurServer(localId, swissTable));
 			locator.start();
@@ -82,20 +82,20 @@ public class Introducer {
 		}
 	}
 
-	public PauwauUrl makeOrReturnUrl(Object obj, boolean persist) throws DigestException, NotResolvedException, NoSuchAlgorithmException, IOException {
+	public CapURL makeOrReturnUrl(Object obj, boolean persist) throws DigestException, NotResolvedException, NoSuchAlgorithmException, IOException {
 		BigInteger swiss = swissTable.getSwissForObject(obj);
 		if(swiss == null) {
 			return makeSturdy(obj, persist).asUrl();
 		} else {
-			return new PauwauUrl(localId.asPublicCopy(), swiss);
+			return new CapURL(localId.asPublicCopy(), swiss);
 		}
 	}
 
-	public Ref liveRef(PauwauUrl url) throws NotResolvedException { return sturdy(url).liveRef(); }
-	public Ref liveRef(String urlString) throws NotResolvedException { return liveRef(new PauwauUrl(urlString)); }
-	public SturdyRef sturdy(PauwauUrl url) { return new SturdyRef(url, locator); }
-	public SturdyRef sturdy(String urlString) { return sturdy(new PauwauUrl(urlString)); }
-	public Object sturdy(BigInteger swiss) { return sturdy(new PauwauUrl(localId.asPublicCopy(), swiss)); }
+	public Ref liveRef(CapURL url) throws NotResolvedException { return sturdy(url).liveRef(); }
+	public Ref liveRef(String urlString) throws NotResolvedException { return liveRef(new CapURL(urlString)); }
+	public SturdyRef sturdy(CapURL url) { return new SturdyRef(url, locator); }
+	public SturdyRef sturdy(String urlString) { return sturdy(new CapURL(urlString)); }
+	public Object sturdy(BigInteger swiss) { return sturdy(new CapURL(localId.asPublicCopy(), swiss)); }
 	public boolean hasSturdy(BigInteger swiss) {
 		try {
 			swissTable.lookupSwiss(swiss);
@@ -112,7 +112,7 @@ public class Introducer {
 		return makeSturdyWithSwiss(object, swissTable.registerNewReferenceSwiss(object, swissNumber), persist);
 	}
 	protected SturdyRef makeSturdyWithSwiss(Object object, BigInteger swiss, boolean persist) throws FileNotFoundException, IOException {
-		PauwauUrl url = new PauwauUrl(localId.asPublicCopy(), swiss);
+		CapURL url = new CapURL(localId.asPublicCopy(), swiss);
 		if(persist) {
 			persistentObjects.put(url.toString(), object);
 		}
