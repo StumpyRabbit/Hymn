@@ -52,6 +52,7 @@ import club.callistohouse.raven.Ref;
 import club.callistohouse.raven.exceptions.NotResolvedException;
 import club.callistohouse.raven.presentation.utils.GalaxyObject;
 import club.callistohouse.utils.events.EventEngine;
+import club.callistohouse.utils.events.Listener;
 
 public class TestPauwau2VatIntegrated extends AbstractPauwauTest {
 
@@ -108,7 +109,7 @@ public class TestPauwau2VatIntegrated extends AbstractPauwauTest {
 			PauwauUrl url = pauwau1.makeOrReturnUrl(testProducer, true);
 			Ref testObjectRef = pauwau2.sturdy(url).liveRef();
 
-			testObjectRef.addListener(
+			testObjectRef.addListener( 
 					new Listener<PauwauTestEvent>(PauwauTestEvent.class) { 
 							protected void handle(PauwauTestEvent event) {
 								log.info(event);
