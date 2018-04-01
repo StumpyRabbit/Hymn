@@ -39,7 +39,7 @@ package club.callistohouse.raven;
 import club.callistohouse.raven.exceptions.NotResolvedException;
 
 
-public interface ReactorInterface {
-	public void value(Object obj) throws NotResolvedException;
+public interface ReactorInterface<T> {
+	public void value(T obj) throws NotResolvedException;
 	public void reactToLostClient(Exception e) throws NotResolvedException;
 }

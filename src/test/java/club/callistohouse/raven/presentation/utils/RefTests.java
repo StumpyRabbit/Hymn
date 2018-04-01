@@ -39,17 +39,21 @@ package club.callistohouse.raven.presentation.utils;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.concurrent.TimeUnit;
+
 import org.apache.log4j.BasicConfigurator;
 import org.junit.Before;
 import org.junit.Test;
 
 import club.callistohouse.raven.CapURL;
+import club.callistohouse.raven.ReactorInterface;
 import club.callistohouse.raven.Ref;
 import club.callistohouse.raven.exceptions.NotResolvedException;
 import club.callistohouse.raven.refs.RefUtil;
 import club.callistohouse.raven.vat.Vat;
 
 public class RefTests {
+	boolean isResolved = false;
 
 	@Before
 	public void setup() {
@@ -74,6 +78,25 @@ public class RefTests {
 			e.printStackTrace();
 		}
 		assertEquals(16, reply.intValue());
+	}
+	@Test
+	public void testOneReactor() throws NotResolvedException, InterruptedException {
+		isResolved = false;
+		Ref ref = RefUtil.wrap("a pauwau is the best", Vat.getLocalVat());
+		Ref newRef = ref.redirectMessage("indexOf", "best");
+		newRef.whenResolved(new ReactorInterface<Integer>() {		
+			@Override
+			public void value(Integer obj) throws NotResolvedException {
+				isResolved = true;
+				assertEquals(16, obj.intValue());
+			}
+			@Override
+			public void reactToLostClient(Exception e) throws NotResolvedException {
+				assertTrue(false);
+			}
+		});
+		TimeUnit.SECONDS.sleep(1);
+		assertTrue(isResolved);
 	}
 	@Test
 	public void testTwo() {
