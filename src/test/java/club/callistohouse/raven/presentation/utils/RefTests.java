@@ -77,7 +77,7 @@ public class RefTests {
 			assertTrue(false);
 			e.printStackTrace();
 		}
-		assertEquals(6, reply.intValue());
+		assertEquals(16, reply.intValue());
 	}
 	@Test
 	public void testOneReactor() throws NotResolvedException, InterruptedException {

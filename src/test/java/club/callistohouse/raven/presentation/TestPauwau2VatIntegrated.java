@@ -71,8 +71,8 @@ public class TestPauwau2VatIntegrated extends AbstractPauwauTest {
 			CapURL url = registerObject(pauwau1, new GalaxyObject());
 			Ref testObject = realizeRef(pauwau2, url);
 			Ref answer1 = testObject.redirectMessage("getTheAnswer");
-			log.info("The value is: " + answer1.getReceiver(5000));
-			assertEquals(42, answer1.getReceiver(1000));
+			log.info("The value is: " + answer1.getReceiver(7000));
+			assertEquals(42, answer1.getReceiver(4000));
 		} catch(Exception e) {
 			log.debug(e);
 			assertTrue(false);

@@ -60,7 +60,7 @@ public abstract class RefImpl {
 
 	public abstract Ref redirectMessage(MessageSend send) throws NotResolvedException;
 
-	public void whenMoreResolved(ReactorInterface reactor) throws NotResolvedException { ((ReactorInterface) reactor).value(getProxy()); }
+	public void whenMoreResolved(ReactorInterface reactor) throws NotResolvedException { ((ReactorInterface) reactor).value(getProxy().getReceiver()); }
 	public void whenBroken(ReactorInterface reactor) throws NotResolvedException {}
 
 	public void whenMoreResolved(Ref reactorRef) throws NotResolvedException {
