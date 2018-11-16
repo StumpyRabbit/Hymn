@@ -56,20 +56,21 @@ import club.callistohouse.session.SessionAgent;
 import club.callistohouse.session.SessionAgent.Started;
 import club.callistohouse.session.SessionAgent.Stopped;
 import club.callistohouse.session.SessionIdentity;
+import club.callistohouse.session.protocol.ThunkStack;
 import club.callistohouse.utils.MapUtil;
 import club.callistohouse.utils.Pair;
 import club.callistohouse.utils.events.Listener;
 
-public class MurmurServer {
+public class RavenServer {
 
 	private Vat vat;
 	private SwissTable swissTable;
 	private Sealer sealer;
 	private Unsealer unsealer;
 	private SessionAgent sessionServer;
-	private Map<String,MurmurTerminal> terminalsByVatId = new HashMap<String, MurmurTerminal>();
+	private Map<String,RavenTerminal> terminalsByVatId = new HashMap<String, RavenTerminal>();
 
-	public MurmurServer(SessionIdentity id, SwissTable swissTable) throws FileNotFoundException, ClassNotFoundException, IOException {
+	public RavenServer(SessionIdentity id, SwissTable swissTable) throws FileNotFoundException, ClassNotFoundException, IOException {
 		this.swissTable = swissTable;
 		this.sessionServer = new SessionAgent(id);
 		Pair<Sealer,Unsealer> pair = Brand.pair(id.getVatId().toString());
@@ -96,11 +97,11 @@ public class MurmurServer {
 			}});
 		sessionServer.addListener(new Listener<Connected>(Connected.class) {
 			protected void handle(Connected event) {
-				MurmurTerminal tempMurmurTerm = MurmurServer.this.getTerminalByRemoteVatId(event.terminal.getFarKey().getVatId());
+				RavenTerminal tempMurmurTerm = RavenServer.this.getTerminalByRemoteVatId(event.terminal.getFarKey().getVatId());
 				if(tempMurmurTerm == null) {
-					tempMurmurTerm = new MurmurTerminal(MurmurServer.this);
+					tempMurmurTerm = new RavenTerminal(RavenServer.this);
 				}
-				final MurmurTerminal murmurTerm = tempMurmurTerm;
+				final RavenTerminal murmurTerm = tempMurmurTerm;
 				murmurTerm.setScope(new Scope(murmurTerm, getSwissTable()));
 				murmurTerm.setSessionTerminal(event.terminal);
 				event.terminal.addListener(new Listener<Identified>(Identified.class) {
@@ -111,7 +112,7 @@ public class MurmurServer {
 			}});
 		sessionServer.addListener(new Listener<Disconnected>(Disconnected.class) {
 			protected void handle(Disconnected event) {
-				MurmurTerminal pauwauTerm = getTerminalByRemoteVatId(event.terminal.getFarKey().getVatId());
+				RavenTerminal pauwauTerm = getTerminalByRemoteVatId(event.terminal.getFarKey().getVatId());
 				if(pauwauTerm != null) {
 					pauwauTerm.getScope().smash();
 					terminalsByVatId.remove(event.terminal.getFarKey().getVatId());
@@ -128,24 +129,26 @@ public class MurmurServer {
 
 	public Object lookupSwiss(BigInteger swissNumber) { return swissTable.lookupSwiss(swissNumber); }
 
-	public MurmurTerminal getTerminal(SessionIdentity id) {
-		MurmurTerminal murmurTerm = getTerminalByRemoteVatId(id.getVatId());
-		if(murmurTerm != null) {
-			return murmurTerm;
+	public RavenTerminal getTerminal(SessionIdentity id) {
+		RavenTerminal term = getTerminalByRemoteVatId(id.getVatId());
+		if(term != null) {
+			return term;
 		}
-		murmurTerm = new MurmurTerminal(this);
+		term = new RavenTerminal(this);
 		if(id.getVatId() != null) {
-			terminalsByVatId.put(id.getVatId(), murmurTerm);
+			terminalsByVatId.put(id.getVatId(), term);
 		} else {
 			throw new IllegalArgumentException("bad id");
 		}
 		Session sess = sessionServer.connect(id);
-		murmurTerm.setSessionTerminal(sess);
-		murmurTerm.setScope(new Scope(murmurTerm, getSwissTable()));
-		return murmurTerm;
+		term.setSessionTerminal(sess);
+		ThunkStack stack = sess.getStack();
+		term.setScope(new Scope(term, getSwissTable()));
+		stack.push(term);
+		return term;
 	}
 
-	public MurmurTerminal getTerminalByRemoteVatId(String vatId) {
+	public RavenTerminal getTerminalByRemoteVatId(String vatId) {
 		if(vatId == null) {
 			return null;
 		}

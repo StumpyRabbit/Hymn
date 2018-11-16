@@ -59,8 +59,8 @@ import com.google.zxing.common.reedsolomon.ReedSolomonDecoder;
 import com.google.zxing.common.reedsolomon.ReedSolomonEncoder;
 import com.google.zxing.common.reedsolomon.ReedSolomonException;
 
-import club.callistohouse.raven.core.MurmurServer;
-import club.callistohouse.raven.core.MurmurTerminal;
+import club.callistohouse.raven.core.RavenServer;
+import club.callistohouse.raven.core.RavenTerminal;
 import club.callistohouse.raven.remote.MurmurInputStream;
 import club.callistohouse.raven.remote.MurmurOutputStream;
 import club.callistohouse.raven.scope.Scope;
@@ -79,7 +79,7 @@ public class EncodingTests {
 		list.add("pauwau");
 
 		SwissTable table = new SwissTable();
-		Scope scope = new Scope(new MurmurTerminal(new MurmurServer(new SessionIdentity("mine", 10042), table)), table);
+		Scope scope = new Scope(new RavenTerminal(new RavenServer(new SessionIdentity("mine", 10042), table)), table);
 
 		ByteArrayOutputStream baos1 = new ByteArrayOutputStream(); 
 		new ObjectOutputStream(baos1).writeObject(list);
@@ -98,7 +98,7 @@ public class EncodingTests {
 	public void testArray() throws IOException, ClassNotFoundException {
 		String[] array = new String[] { "robert" };
 		SwissTable table = new SwissTable();
-		Scope scope = new Scope(new MurmurTerminal(new MurmurServer(new SessionIdentity("mine", 10042), table)), table);
+		Scope scope = new Scope(new RavenTerminal(new RavenServer(new SessionIdentity("mine", 10042), table)), table);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
 		new MurmurOutputStream(baos, scope).writeObject(array);
 		String[] poppedArray = (String[])new MurmurInputStream(new ByteArrayInputStream(baos.toByteArray()), scope).readObject();
@@ -110,7 +110,7 @@ public class EncodingTests {
 	public void testString() throws IOException, ClassNotFoundException {
 		String str = "Life can be so sweet, all it takes is faith and the right attitude";
 		SwissTable table = new SwissTable();
-		Scope scope = new Scope(new MurmurTerminal(new MurmurServer(new SessionIdentity("mine", 10042), table)), table);
+		Scope scope = new Scope(new RavenTerminal(new RavenServer(new SessionIdentity("mine", 10042), table)), table);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
 		new MurmurOutputStream(baos, scope).writeObject(str);
 		System.out.println(baos.toString());

@@ -49,20 +49,21 @@ import club.callistohouse.raven.remote.MurmurOutputStream;
 import club.callistohouse.raven.scope.Scope;
 import club.callistohouse.session.Session;
 import club.callistohouse.session.Session.DataReceived;
+import club.callistohouse.session.protocol.ThunkLayer;
 import club.callistohouse.utils.events.Listener;
 
-public class MurmurTerminal {
-	private static Logger log = Logger.getLogger(MurmurTerminal.class);
+public class RavenTerminal extends ThunkLayer {
+	private static Logger log = Logger.getLogger(RavenTerminal.class);
 
-	private MurmurServer server;
+	private RavenServer server;
 	private Session sessionTerminal;
 	private Scope scope;
 
-	public MurmurTerminal(MurmurServer server) {
+	public RavenTerminal(RavenServer server) {
 		this.server = server;
 	}
 
-	public MurmurServer getServer() { return server; }
+	public RavenServer getServer() { return server; }
 	public Scope getScope() { return scope; }
 	public void setScope(Scope scope) {
 		if(this.scope == null)

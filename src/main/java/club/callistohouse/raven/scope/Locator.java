@@ -38,15 +38,15 @@ package club.callistohouse.raven.scope;
 
 import club.callistohouse.raven.Ref;
 import club.callistohouse.raven.SturdyRef;
-import club.callistohouse.raven.core.MurmurServer;
+import club.callistohouse.raven.core.RavenServer;
 import club.callistohouse.raven.exceptions.NotResolvedException;
 import club.callistohouse.raven.refs.RefUtil;
 
 public class Locator {
 
-	private MurmurServer server;
+	private RavenServer server;
 
-	public Locator(MurmurServer server) {
+	public Locator(RavenServer server) {
 		this.server = server;
 	}
 

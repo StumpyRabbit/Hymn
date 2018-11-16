@@ -43,7 +43,7 @@ import java.security.NoSuchAlgorithmException;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
-import club.callistohouse.raven.Raven;
+import club.callistohouse.raven.Introducer;
 import club.callistohouse.raven.CapURL;
 import club.callistohouse.raven.Ref;
 import club.callistohouse.raven.exceptions.NotResolvedException;
@@ -51,17 +51,17 @@ import club.callistohouse.raven.exceptions.NotResolvedException;
 public class AbstractPauwauTest {
 	static Logger log = Logger.getLogger(AbstractPauwauTest.class);
 
-	protected static Ref realizeRef(Raven intro, CapURL url) throws NotResolvedException {
+	protected static Ref realizeRef(Introducer intro, CapURL url) throws NotResolvedException {
 		return intro.liveRef(url);
 	}
 
-	protected static CapURL registerObject(Raven intro, Object obj) throws DigestException, NotResolvedException, NoSuchAlgorithmException, IOException {
+	protected static CapURL registerObject(Introducer intro, Object obj) throws DigestException, NotResolvedException, NoSuchAlgorithmException, IOException {
 		return intro.makeOrReturnUrl(obj, true);
 	}
 
-	Raven pauwau1 = null;
-	Raven pauwau2 = null;
-	Raven pauwau3 = null;
+	Introducer pauwau1 = null;
+	Introducer pauwau2 = null;
+	Introducer pauwau3 = null;
 
 	public void setup2Introducers() {
 		if(pauwau1 == null) {
@@ -69,8 +69,8 @@ public class AbstractPauwauTest {
 			log.info("2 Introducers starting");
 			try {
 				Thread.sleep(1000);
-				pauwau1 = new Raven("first", 10001).onTheAir();
-				pauwau2 = new Raven("second", 10002).onTheAir();
+				pauwau1 = new Introducer("first", 10001).onTheAir();
+				pauwau2 = new Introducer("second", 10002).onTheAir();
 			} catch (Exception e) { log.error("oops", e); }
 			log.info("2 Introducers on the air");
 		} else {
@@ -90,9 +90,9 @@ public class AbstractPauwauTest {
 			BasicConfigurator.configure();
 			log.info("3 Introducers starting");
 			try {
-				pauwau1 = new Raven("first", 10001).onTheAir();
-				pauwau2 = new Raven("second", 10002).onTheAir();
-				pauwau3 = new Raven("third", 10003).onTheAir();
+				pauwau1 = new Introducer("first", 10001).onTheAir();
+				pauwau2 = new Introducer("second", 10002).onTheAir();
+				pauwau3 = new Introducer("third", 10003).onTheAir();
 			} catch (Exception e) { log.error("oops", e); }
 			log.info("3 Introducers on the air");
 		} else {

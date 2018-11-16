@@ -46,13 +46,13 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
-import club.callistohouse.raven.core.MurmurServer;
+import club.callistohouse.raven.core.RavenServer;
 import club.callistohouse.raven.exceptions.NotResolvedException;
 import club.callistohouse.raven.scope.Locator;
 import club.callistohouse.raven.tables.SwissTable;
 import club.callistohouse.session.SessionIdentity;
 
-public class Raven {
+public class Introducer {
 
 	protected SessionIdentity localId;
 	protected SwissTable swissTable;
@@ -60,17 +60,17 @@ public class Raven {
 	protected File persistentObjectsFile;
 	protected Map<String,Object> persistentObjects = new HashMap<String, Object>();
 
-	public Raven(String nickname, int port) throws UnknownHostException {
+	public Introducer(String nickname, int port) throws UnknownHostException {
 		this(new SessionIdentity(nickname, port));
 	}
-	public Raven(SessionIdentity id) {
+	public Introducer(SessionIdentity id) {
 		this.localId = id;
 		this.swissTable = new SwissTable();
 	}
 
-	public Raven onTheAir() throws FileNotFoundException, ClassNotFoundException, IOException {
+	public Introducer onTheAir() throws FileNotFoundException, ClassNotFoundException, IOException {
 		if (locator == null) {
-			locator = new Locator(new MurmurServer(localId, swissTable));
+			locator = new Locator(new RavenServer(localId, swissTable));
 			locator.start();
 		}
 		return this;

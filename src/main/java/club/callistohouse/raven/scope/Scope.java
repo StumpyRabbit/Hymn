@@ -42,8 +42,8 @@ import java.net.InetSocketAddress;
 import java.security.DigestException;
 
 import club.callistohouse.raven.Ref;
-import club.callistohouse.raven.core.MurmurServer;
-import club.callistohouse.raven.core.MurmurTerminal;
+import club.callistohouse.raven.core.RavenServer;
+import club.callistohouse.raven.core.RavenTerminal;
 import club.callistohouse.raven.descriptors.FarDesc;
 import club.callistohouse.raven.descriptors.ImportDesc;
 import club.callistohouse.raven.descriptors.IncomingDesc;
@@ -83,9 +83,9 @@ public class Scope {
 	private SwissTable table;
 	private NonceLocator localLocator;
 	private Ref remoteLocator;
-	private MurmurTerminal terminal;
+	private RavenTerminal terminal;
 
-	public Scope(MurmurTerminal term, SwissTable table) {
+	public Scope(RavenTerminal term, SwissTable table) {
 		this.table = table;
 		this.terminal = term;
 		this.localLocator = new NonceLocator(this, table);
@@ -101,8 +101,8 @@ public class Scope {
 	public Sealer getSealer() { return getServer().getSealer(); }
 	public Unsealer getUnsealer() { return getServer().getUnsealer(); }
 	public SwissTable getSwissTable() { return table; }
-	public MurmurTerminal getTerminal() { return terminal; }
-	public MurmurServer getServer() { return terminal.getServer(); }
+	public RavenTerminal getTerminal() { return terminal; }
+	public RavenServer getServer() { return terminal.getServer(); }
 	public Vat getVat() {
 		if(getServer() == null)
 			return null;
@@ -142,7 +142,7 @@ public class Scope {
 		return obj;
 	}
 
-	public MurmurTerminal getTerminal(SessionIdentity remoteId) { return getServer().getTerminal(remoteId); }
+	public RavenTerminal getTerminal(SessionIdentity remoteId) { return getServer().getTerminal(remoteId); }
 
 	private ObjectRefDesc makeEventualDescriptor(ProxyRefImpl proxy) throws IOException, SealedException, NotResolvedException {
 		RemoteHandler handler = handlerFrom(proxy);

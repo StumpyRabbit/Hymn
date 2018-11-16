@@ -39,7 +39,7 @@ package club.callistohouse.raven.scope;
 import java.io.IOException;
 import java.math.BigInteger;
 
-import club.callistohouse.raven.core.MurmurTerminal;
+import club.callistohouse.raven.core.RavenTerminal;
 import club.callistohouse.raven.exceptions.NotResolvedException;
 import club.callistohouse.raven.tables.NearGiftTable;
 import club.callistohouse.raven.tables.PromiseGiftTable;
@@ -67,7 +67,7 @@ public class NonceLocator {
 	}
 
 	public Object acceptFrom(SessionIdentity remoteId, BigInteger nonce, Object vine) throws IOException, NotResolvedException {
-		MurmurTerminal term = scope.getTerminal(remoteId);
+		RavenTerminal term = scope.getTerminal(remoteId);
 		PromiseGiftTable donorTable = term.getScope().getLocalLocator().promiseGifts;
 		return donorTable.acceptFor(scope.getRemoteIdentity().getVatId(), nonce);
 	}
