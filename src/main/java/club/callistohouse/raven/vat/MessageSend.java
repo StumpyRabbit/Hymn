@@ -52,7 +52,7 @@ import club.callistohouse.raven.refs.BrokenRefImpl;
 import club.callistohouse.raven.refs.NearRefImpl;
 import club.callistohouse.raven.refs.RefImpl;
 import club.callistohouse.raven.refs.RefUtil;
-import club.callistohouse.raven.remote.MurmurMessage;
+import club.callistohouse.raven.remote.RavenMessage;
 import club.callistohouse.raven.resolvers.Resolver;
 
 @SuppressWarnings("rawtypes")
@@ -100,7 +100,7 @@ public class MessageSend implements PassByCopy,Runnable {
 
 	public String toString() {
 		try {
-			return getClass().getSimpleName() + "(oneWay: " + isOneWay() + " action: " + action + ", " + getReceiver() + ", " + MurmurMessage.argumentsToString(args) + ")";
+			return getClass().getSimpleName() + "(oneWay: " + isOneWay() + " action: " + action + ", " + getReceiver() + ", " + RavenMessage.argumentsToString(args) + ")";
 		} catch (ReceiverNotFoundException e) {
 			e.printStackTrace();
 		}

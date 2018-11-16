@@ -48,6 +48,7 @@ import club.callistohouse.raven.scope.Sealer;
 import club.callistohouse.raven.scope.Unsealer;
 import club.callistohouse.raven.tables.SwissTable;
 import club.callistohouse.raven.vat.Vat;
+import club.callistohouse.session.CipherThunkMaker;
 import club.callistohouse.session.Session;
 import club.callistohouse.session.Session.Connected;
 import club.callistohouse.session.Session.Disconnected;
@@ -55,6 +56,7 @@ import club.callistohouse.session.Session.Identified;
 import club.callistohouse.session.SessionAgent;
 import club.callistohouse.session.SessionAgent.Started;
 import club.callistohouse.session.SessionAgent.Stopped;
+import club.callistohouse.session.SessionAgentMap;
 import club.callistohouse.session.SessionIdentity;
 import club.callistohouse.session.protocol.ThunkStack;
 import club.callistohouse.utils.MapUtil;
@@ -72,12 +74,20 @@ public class RavenServer {
 
 	public RavenServer(SessionIdentity id, SwissTable swissTable) throws FileNotFoundException, ClassNotFoundException, IOException {
 		this.swissTable = swissTable;
-		this.sessionServer = new SessionAgent(id);
+		this.sessionServer = new SessionAgent(id, buildSessionAgentMap());
 		Pair<Sealer,Unsealer> pair = Brand.pair(id.getVatId().toString());
 		this.sealer = pair.first();
 		this.unsealer = pair.second();
 		this.vat = new Vat(id.getDomain() + "-vat");
 		setupListenersOnSessionServer();
+	}
+
+	private SessionAgentMap buildSessionAgentMap() {
+		return new SessionAgentMap(new CipherThunkMaker("AESede", "AES/CBC/PKCS5Padding", 32, 16, true), new ParrotThunkMaker(this));
+	}
+
+	public Scope getScopeForFarKey(SessionIdentity farKey) {
+		return getTerminalByRemoteVatId(farKey.getVatId()).getScope();
 	}
 
 	public SwissTable getSwissTable() { return swissTable; }

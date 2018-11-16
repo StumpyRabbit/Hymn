@@ -44,7 +44,7 @@ import club.callistohouse.raven.exceptions.NotResolvedException;
 import club.callistohouse.raven.scope.Scope;
 
 @SuppressWarnings("serial")
-public abstract class MurmurMessage implements PassByCopy {
+public abstract class RavenMessage implements PassByCopy {
 
 	public static String argumentsToString(Object[] arguments) {
 		if(arguments.length == 0)

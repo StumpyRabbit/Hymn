@@ -61,8 +61,8 @@ import com.google.zxing.common.reedsolomon.ReedSolomonException;
 
 import club.callistohouse.raven.core.RavenServer;
 import club.callistohouse.raven.core.RavenTerminal;
-import club.callistohouse.raven.remote.MurmurInputStream;
-import club.callistohouse.raven.remote.MurmurOutputStream;
+import club.callistohouse.raven.remote.RavenInputStream;
+import club.callistohouse.raven.remote.RavenOutputStream;
 import club.callistohouse.raven.scope.Scope;
 import club.callistohouse.raven.tables.SwissTable;
 import club.callistohouse.session.SessionIdentity;
@@ -86,8 +86,8 @@ public class EncodingTests {
 		List<String> poppedList1 = (List<String>)new ObjectInputStream(new ByteArrayInputStream(baos1.toByteArray())).readObject();
 
 		ByteArrayOutputStream baos2 = new ByteArrayOutputStream(); 
-		new MurmurOutputStream(baos2, scope).writeObject(list);
-		List<String> poppedList2 = (List<String>)new MurmurInputStream(new ByteArrayInputStream(baos2.toByteArray()), scope).readObject();
+		new RavenOutputStream(baos2, scope).writeObject(list);
+		List<String> poppedList2 = (List<String>)new RavenInputStream(new ByteArrayInputStream(baos2.toByteArray()), scope).readObject();
 
 		assertEquals(list, poppedList1);
 		assertEquals(list, poppedList2);
@@ -100,8 +100,8 @@ public class EncodingTests {
 		SwissTable table = new SwissTable();
 		Scope scope = new Scope(new RavenTerminal(new RavenServer(new SessionIdentity("mine", 10042), table)), table);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
-		new MurmurOutputStream(baos, scope).writeObject(array);
-		String[] poppedArray = (String[])new MurmurInputStream(new ByteArrayInputStream(baos.toByteArray()), scope).readObject();
+		new RavenOutputStream(baos, scope).writeObject(array);
+		String[] poppedArray = (String[])new RavenInputStream(new ByteArrayInputStream(baos.toByteArray()), scope).readObject();
 		assertArrayEquals(array, poppedArray);
 	}
 
@@ -112,9 +112,9 @@ public class EncodingTests {
 		SwissTable table = new SwissTable();
 		Scope scope = new Scope(new RavenTerminal(new RavenServer(new SessionIdentity("mine", 10042), table)), table);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
-		new MurmurOutputStream(baos, scope).writeObject(str);
+		new RavenOutputStream(baos, scope).writeObject(str);
 		System.out.println(baos.toString());
-		String poppedStr = (String)new MurmurInputStream(new ByteArrayInputStream(baos.toByteArray()), scope).readObject();
+		String poppedStr = (String)new RavenInputStream(new ByteArrayInputStream(baos.toByteArray()), scope).readObject();
 		assertEquals(str, poppedStr);
 	}
 

@@ -36,20 +36,19 @@
  *******************************************************************************/
 package club.callistohouse.raven.core;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import org.apache.log4j.Logger;
 
 import club.callistohouse.raven.exceptions.NotResolvedException;
-import club.callistohouse.raven.remote.MurmurInputStream;
-import club.callistohouse.raven.remote.MurmurMessage;
-import club.callistohouse.raven.remote.MurmurOutputStream;
+import club.callistohouse.raven.remote.RavenMessage;
 import club.callistohouse.raven.scope.Scope;
 import club.callistohouse.session.Session;
 import club.callistohouse.session.Session.DataReceived;
+import club.callistohouse.session.payload.Frame;
+import club.callistohouse.session.payload.RawData;
 import club.callistohouse.session.protocol.ThunkLayer;
+import club.callistohouse.session.protocol.ThunkStack;
 import club.callistohouse.utils.events.Listener;
 
 public class RavenTerminal extends ThunkLayer {
@@ -58,11 +57,13 @@ public class RavenTerminal extends ThunkLayer {
 	private RavenServer server;
 	private Session sessionTerminal;
 	private Scope scope;
+	private ThunkStack stack;
 
 	public RavenTerminal(RavenServer server) {
 		this.server = server;
 	}
 
+	public void setStack(ThunkStack aStack) { stack = aStack;}
 	public RavenServer getServer() { return server; }
 	public Scope getScope() { return scope; }
 	public void setScope(Scope scope) {
@@ -88,25 +89,20 @@ public class RavenTerminal extends ThunkLayer {
 		return getClass().getSimpleName() + "<hashcode: " + hashCode() + ">";
 	}
 
-	@SuppressWarnings({ "resource" })
-	public void sendMsg(MurmurMessage msg) throws IOException {
+	public void sendMsg(RavenMessage msg) throws IOException {
 		log.debug("sending message: " + msg);
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		new MurmurOutputStream(baos, getScope()).writeObject(msg);
-		getSessionTerminal().send(baos.toByteArray());
+		Frame frame = new Frame(new RawData());
+		frame.setPayload(msg);
+		stack.downcall(frame, this);
 	}
-	@SuppressWarnings({ "resource" })
+
 	public void receiveSessionData(DataReceived sessionData) {
-		ByteArrayInputStream bais = new ByteArrayInputStream((byte[]) sessionData.data);
+		log.debug("receiving message: " + sessionData.data);
 		try {
-			MurmurMessage msg = (MurmurMessage)new MurmurInputStream(bais, getScope()).readObject();
-			log.debug("receiving message: " + msg);
-			msg.receiveMessageOnScope(getScope());
-		} catch (ClassNotFoundException e) {
+			((RavenMessage)sessionData.data).receiveMessageOnScope(getScope());
+		} catch (NotResolvedException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (NotResolvedException e) {
 			e.printStackTrace();
 		}
 	}

@@ -46,7 +46,7 @@ import club.callistohouse.raven.vat.MessageSend;
 import club.callistohouse.raven.vat.Vat;
 
 @SuppressWarnings("serial")
-public abstract class AbstractDeliverMessage extends MurmurMessage {
+public abstract class AbstractDeliverMessage extends RavenMessage {
 
 	private int receiverId;
 	private String selector;

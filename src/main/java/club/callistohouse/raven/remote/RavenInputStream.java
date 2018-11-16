@@ -48,10 +48,10 @@ import java.io.ObjectInputStream;
 
 import club.callistohouse.raven.scope.Scope;
 
-public class MurmurInputStream extends ObjectInputStream {
+public class RavenInputStream extends ObjectInputStream {
 	private Scope scope;
 
-	public MurmurInputStream(InputStream in, Scope scope) throws IOException {
+	public RavenInputStream(InputStream in, Scope scope) throws IOException {
 		super(in);
         enableResolveObject(true);
 		this.scope = scope;

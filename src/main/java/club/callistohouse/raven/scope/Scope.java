@@ -61,7 +61,7 @@ import club.callistohouse.raven.handlers.RemotePromiseHandler;
 import club.callistohouse.raven.refs.ProxyRefImpl;
 import club.callistohouse.raven.refs.RefImpl;
 import club.callistohouse.raven.refs.RefUtil;
-import club.callistohouse.raven.remote.MurmurMessage;
+import club.callistohouse.raven.remote.RavenMessage;
 import club.callistohouse.raven.resolvers.ProxyResolver;
 import club.callistohouse.raven.tables.ClientTable;
 import club.callistohouse.raven.tables.ProviderTable;
@@ -276,7 +276,7 @@ public class Scope {
 		return handler;
 	}
 
-	public void send(MurmurMessage murmurMessage) throws IOException {
+	public void send(RavenMessage murmurMessage) throws IOException {
 		terminal.sendMsg(murmurMessage);
 	}
 

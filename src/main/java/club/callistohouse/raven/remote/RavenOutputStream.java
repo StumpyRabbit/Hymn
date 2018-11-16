@@ -51,10 +51,10 @@ import club.callistohouse.raven.exceptions.NotResolvedException;
 import club.callistohouse.raven.exceptions.SealedException;
 import club.callistohouse.raven.scope.Scope;
 
-public class MurmurOutputStream extends ObjectOutputStream {
+public class RavenOutputStream extends ObjectOutputStream {
 	private Scope scope;
 
-	public MurmurOutputStream(OutputStream out, Scope scope) throws IOException {
+	public RavenOutputStream(OutputStream out, Scope scope) throws IOException {
 		super(out);
         enableReplaceObject(true);
 		this.scope = scope;

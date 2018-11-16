@@ -41,7 +41,7 @@ import java.io.IOException;
 import club.callistohouse.raven.Ref;
 import club.callistohouse.raven.scope.Scope;
 
-public class GCAnswerMessage extends MurmurMessage {
+public class GCAnswerMessage extends RavenMessage {
 	private static final long serialVersionUID = -8491536922805030292L;
 
 	private int wirePosition;

@@ -41,7 +41,7 @@ import java.io.IOException;
 import club.callistohouse.raven.scope.Scope;
 
 
-public class ShutdownMessage extends MurmurMessage {
+public class ShutdownMessage extends RavenMessage {
 	private static final long serialVersionUID = 7003467886770814753L;
 
 	private int receivedCount;
