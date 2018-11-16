@@ -114,6 +114,10 @@ public class RavenServer {
 				final RavenTerminal murmurTerm = tempMurmurTerm;
 				murmurTerm.setScope(new Scope(murmurTerm, getSwissTable()));
 				murmurTerm.setSessionTerminal(event.terminal);
+				ThunkStack stack = event.terminal.getStack();
+				if(!stack.head().equals(murmurTerm)) {
+					stack.push(murmurTerm);
+				}
 				event.terminal.addListener(new Listener<Identified>(Identified.class) {
 					public void handle(Identified event) {
 						terminalsByVatId.put(murmurTerm.getScope().getRemoteVatId(), murmurTerm);
