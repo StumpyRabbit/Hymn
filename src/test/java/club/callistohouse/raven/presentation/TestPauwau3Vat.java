@@ -49,7 +49,7 @@ import club.callistohouse.raven.presentation.utils.GalaxyObject;
 public class TestPauwau3Vat extends AbstractPauwauTest {
 	private static Logger log = Logger.getLogger(TestPauwau3Vat.class);
 
-	@Test
+	@Test(timeout=50000)
 	public void testThreeVats() throws Exception {
 		try {
 			setup3Introducers();
@@ -60,7 +60,7 @@ public class TestPauwau3Vat extends AbstractPauwauTest {
 			final Ref bob = (Ref) realizeRef(pauwau3, bobUrl);
 
 			Ref answer = alice.redirectMessage("redirectForTheAnswer", bob);
-			log.info("The value is: " + answer.getReceiver(5000));
+			log.info("The value is: " + answer.getReceiver(50000));
 			assertEquals(42, answer.getReceiver(100));
 		} catch(Exception e) {
 			log.debug(e);

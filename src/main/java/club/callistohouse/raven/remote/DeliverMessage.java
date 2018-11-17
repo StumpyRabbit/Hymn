@@ -65,8 +65,9 @@ public class DeliverMessage extends AbstractDeliverMessage {
 	public void setRedirector(Object  redirector) { this.redirector = redirector; }
 	public Integer getResolverId() { 
 		if(redirector == null) return null;
-		if(RefUtil.isRef(redirector)) return ((RedirectorProxy)RefUtil.unwrap(redirector)).getWireId();
-		return ((Redirector)redirector).getWireId();
+		/*if(RefUtil.isRef(redirector)) return (Ref)(RefUtil.unwrap(redirector);
+		return ((Redirector)redirector).getWireId();*/
+		return 0;
 	}
 
 	public MessageEnum getType() { return MessageEnum.DELIVER; }

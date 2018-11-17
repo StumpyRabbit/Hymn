@@ -65,26 +65,26 @@ public class TestPauwau2VatIntegrated extends AbstractPauwauTest {
 		tearDown2Introducers();
 	}
 
-	@Test
+	@Test(timeout=50000)
 	public void testTwoVats() throws Exception {
 		try {
 			CapURL url = registerObject(pauwau1, new GalaxyObject());
 			Ref testObject = realizeRef(pauwau2, url);
 			Ref answer1 = testObject.redirectMessage("getTheAnswer");
-			log.info("The value is: " + answer1.getReceiver(7000));
-			assertEquals(42, answer1.getReceiver(4000));
+			log.info("The value is: " + answer1.getReceiver(20000));
+			assertEquals(42, answer1.getReceiver(1000));
 		} catch(Exception e) {
 			log.debug(e);
 			assertTrue(false);
 		}
 	}
 	public boolean whenReactorTriggered = false;
-	@Test
+	@Test(timeout=50000)
 	public void testTwoVatsWithWhen() throws Exception {
 		CapURL url = registerObject(pauwau1, new GalaxyObject());
 		final Ref answer = realizeRef(pauwau2, url).redirectMessage("getTheAnswer").redirectMessage("hashCode");
 		answer.whenResolved(buildWhenReactor());
-		assertEquals(42, answer.getReceiver(3000));
+		assertEquals(42, answer.getReceiver(20000));
 		log.info("The value from the promise is: " + answer.getReceiver(1000));
 		Thread.sleep(10);
 		assertTrue(whenReactorTriggered);
@@ -101,7 +101,7 @@ public class TestPauwau2VatIntegrated extends AbstractPauwauTest {
 		};
 	}
 	Object myTestEvent;
-	@Test
+	@Test(timeout=50000)
 	public void testTwoVatsEvents() throws Exception {
 		try {
 			log.info("starting Two Vat Event test");
@@ -116,7 +116,7 @@ public class TestPauwau2VatIntegrated extends AbstractPauwauTest {
 								myTestEvent = event;
 							}});
 
-			Thread.sleep(500);
+			Thread.sleep(20000);
 			testProducer.fireTestEvent();
 			Thread.sleep(200);
 			assertNotNull(myTestEvent);

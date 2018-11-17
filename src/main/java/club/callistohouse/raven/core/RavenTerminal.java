@@ -74,14 +74,14 @@ public class RavenTerminal extends ThunkLayer {
 	public void setSessionTerminal(Session term) {
 		if(sessionTerminal == null) {
 			this.sessionTerminal = term;
-			sessionTerminal.addListener(
+/*			sessionTerminal.addListener(
 					new Listener<DataReceived>(DataReceived.class) {
 						public void handle(final DataReceived msg) { 
 							getScope().getVat().sendRunnable(new Runnable() {
 								public void run() {
 									receiveSessionData(msg);
 								}}); 
-						} });
+						} });*/
 		}
 	}
 
@@ -96,14 +96,18 @@ public class RavenTerminal extends ThunkLayer {
 		stack.downcall(frame, this);
 	}
 
-	public void receiveSessionData(DataReceived sessionData) {
-		log.debug("receiving message: " + sessionData.data);
+	public Object receiveSessionData(RavenMessage ravenMsg) {
 		try {
-			((RavenMessage)sessionData.data).receiveMessageOnScope(getScope());
+			ravenMsg.receiveMessageOnScope(getScope());
+			log.debug("received message: " + ravenMsg);
 		} catch (NotResolvedException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return ravenMsg;
 	}
+
+	protected Object downThunk(Frame frame) { return frame.getPayload(); }
+	protected Object upThunk(Frame frame) { return receiveSessionData((RavenMessage) frame.getPayload()); }
 }

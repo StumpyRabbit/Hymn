@@ -47,7 +47,7 @@ import club.callistohouse.raven.presentation.utils.GalaxyObject;
 
 public class TestPauwau2VatException extends AbstractPauwauTest {
 
-	@Test
+	@Test(timeout=50000)
 	public void testTwoVats() throws Exception {
 		try {
 			setup2Introducers();
@@ -55,7 +55,7 @@ public class TestPauwau2VatException extends AbstractPauwauTest {
 			Ref testObject = realizeRef(pauwau2, url);
 
 			Ref answer1 = testObject.redirectMessage("getTheAnswerException");
-			log.info("The value is: " + answer1.getReceiver(2000));
+			log.info("The value is: " + answer1.getReceiver(20000));
 			assertEquals(42, answer1.getReceiver(1000));
 		} catch(Exception e) {
 			log.debug(e);
