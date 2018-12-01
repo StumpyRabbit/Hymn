@@ -39,21 +39,21 @@ package club.callistohouse.raven.tables;
 import java.io.IOException;
 
 import club.callistohouse.raven.exceptions.NotResolvedException;
-import club.callistohouse.raven.resolvers.ProxyResolver;
+import club.callistohouse.raven.resolvers.ResolverReactor;
 import club.callistohouse.utils.Pair;
 
-public class ClientTable extends CommTable<ProxyResolver> {
+public class ClientTable extends CommTable<ResolverReactor> {
 
 	public ClientTable(String tableName, boolean b) {
 		super(tableName, b);
 	}
  
 	public void smash(Exception e) throws IOException, NotResolvedException {
-		for(Pair<ProxyResolver,Integer> pair:map.values()) {
+		for(Pair<ResolverReactor,Integer> pair:map.values()) {
 			try {
-				send((ProxyResolver) pair.first(), "smash", e);
+				send((ResolverReactor) pair.first(), "smash", e);
 			} catch (Exception e1) {
-				((ProxyResolver) pair.first()).smash(e1);
+				((ResolverReactor) pair.first()).smash(e1);
 			}
 		}
 		super.smash(e);

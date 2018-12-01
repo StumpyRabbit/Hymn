@@ -41,7 +41,7 @@ import club.callistohouse.raven.Ref;
 import club.callistohouse.raven.exceptions.NotResolvedException;
 import club.callistohouse.raven.exceptions.SealedException;
 import club.callistohouse.raven.handlers.RemoteHandler;
-import club.callistohouse.raven.resolvers.ProxyResolver;
+import club.callistohouse.raven.resolvers.ResolverReactor;
 import club.callistohouse.raven.scope.Brand;
 import club.callistohouse.raven.scope.Scope;
 import club.callistohouse.raven.scope.SealedBox;
@@ -51,9 +51,9 @@ import club.callistohouse.raven.vat.Vat;
 public abstract class ProxyRefImpl extends RefImpl {
 
 	private RemoteHandler handler;
-	private ProxyResolver resolver;
+	private ResolverReactor resolver;
 
-	public ProxyRefImpl(RemoteHandler handler, ProxyResolver resolver) {
+	public ProxyRefImpl(RemoteHandler handler, ResolverReactor resolver) {
 		this.handler = handler;
 		this.resolver = resolver;
 	}
@@ -61,7 +61,7 @@ public abstract class ProxyRefImpl extends RefImpl {
 	public RemoteHandler getHandler() { return handler; }
 	public Scope getScope() { return handler.getScope(); }
 	public Vat getVat() { return getScope().getVat(); }
-	public ProxyResolver getResolver() { return resolver; }
+	public ResolverReactor getResolver() { return resolver; }
 
 	public Ref redirectMessage(MessageSend send) throws NotResolvedException {
 		send.setRef(getProxy());

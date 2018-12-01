@@ -49,12 +49,12 @@ import club.callistohouse.raven.refs.FarRefImpl;
 import club.callistohouse.raven.refs.RefUtil;
 import club.callistohouse.raven.refs.RemotePromiseRefImpl;
 
-public class ProxyResolver implements Resolver, ReactorInterface {
+public class ResolverReactor implements Resolver, ReactorInterface {
 	RemoteHandler handler;
 	private WeakReference<Ref> ref;
 	private BigInteger objectHash;
 
-	public ProxyResolver(RemoteHandler remoteHandler, BigInteger swissHash) {
+	public ResolverReactor(RemoteHandler remoteHandler, BigInteger swissHash) {
 		this.handler = remoteHandler;
 		this.objectHash = swissHash;
 	}

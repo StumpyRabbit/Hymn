@@ -40,7 +40,7 @@ import java.math.BigInteger;
 
 import club.callistohouse.raven.exceptions.NotResolvedException;
 import club.callistohouse.raven.scope.Locator;
-import club.callistohouse.session.SessionIdentity;
+import club.callistohouse.session.parrotttalk.SessionIdentity;
 
 public class SturdyRef {
 

@@ -52,7 +52,7 @@ import club.callistohouse.raven.remote.DeliverMessage;
 import club.callistohouse.raven.remote.DeliverOnlyMessage;
 import club.callistohouse.raven.remote.GCAnswerMessage;
 import club.callistohouse.raven.remote.GCExportMessage;
-import club.callistohouse.raven.resolvers.ProxyResolver;
+import club.callistohouse.raven.resolvers.ResolverReactor;
 import club.callistohouse.raven.scope.Brand;
 import club.callistohouse.raven.scope.Scope;
 import club.callistohouse.raven.scope.SealedBox;
@@ -65,7 +65,7 @@ public class RemoteHandler {
 	private static Logger log = Logger.getLogger(RemoteHandler.class);
 
 	public Scope scope;
-	public ProxyResolver resolver;
+	public ResolverReactor resolver;
 	public Integer wireId = 0;
 	public Integer wireCount = 0;
 	private List<MessageSend> breakageSends = new ArrayList<MessageSend>();
@@ -73,7 +73,7 @@ public class RemoteHandler {
 	public RemoteHandler(Scope scope, Integer wireId, BigInteger hash) {
 		this.scope = scope;
 		this.wireId = wireId;
-		this.resolver = new ProxyResolver(this, hash);
+		this.resolver = new ResolverReactor(this, hash);
 	}
 
 	public Scope getScope() { return scope; }

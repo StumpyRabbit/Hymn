@@ -39,13 +39,13 @@ package club.callistohouse.raven.refs;
 import club.callistohouse.raven.Ref;
 import club.callistohouse.raven.exceptions.NotResolvedException;
 import club.callistohouse.raven.handlers.RemoteHandler;
-import club.callistohouse.raven.resolvers.ProxyResolver;
+import club.callistohouse.raven.resolvers.ResolverReactor;
 
 public class RemotePromiseRefImpl extends ProxyRefImpl implements PromiseInterface {
 
 	private RefImpl ref;
 
-	public RemotePromiseRefImpl(RemoteHandler handler, ProxyResolver resolver) {
+	public RemotePromiseRefImpl(RemoteHandler handler, ResolverReactor resolver) {
 		super(handler, resolver);
 	}
  

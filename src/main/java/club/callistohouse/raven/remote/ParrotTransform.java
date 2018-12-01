@@ -5,7 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import club.callistohouse.raven.scope.Scope;
-import club.callistohouse.session.EncoderThunk;
+import club.callistohouse.session.parrotttalk.EncoderThunk;
 
 public class ParrotTransform extends EncoderThunk {
 

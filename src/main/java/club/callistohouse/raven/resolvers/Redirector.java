@@ -44,9 +44,9 @@ import club.callistohouse.raven.exceptions.NotResolvedException;
 public class Redirector implements ReactorInterface, PassByCopy {
 	private static final long serialVersionUID = -117554372550928544L;
 
-	protected ProxyResolver resolver;
+	protected ResolverReactor resolver;
 
-	public Redirector(ProxyResolver resolver) {
+	public Redirector(ResolverReactor resolver) {
 		this.resolver = resolver;
 	}
 

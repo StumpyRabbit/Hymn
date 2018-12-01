@@ -43,12 +43,12 @@ import org.apache.log4j.Logger;
 import club.callistohouse.raven.exceptions.NotResolvedException;
 import club.callistohouse.raven.remote.RavenMessage;
 import club.callistohouse.raven.scope.Scope;
-import club.callistohouse.session.Session;
-import club.callistohouse.session.Session.DataReceived;
-import club.callistohouse.session.payload.Frame;
-import club.callistohouse.session.payload.RawData;
-import club.callistohouse.session.protocol.ThunkLayer;
-import club.callistohouse.session.protocol.ThunkStack;
+import club.callistohouse.session.parrotttalk.Session;
+import club.callistohouse.session.parrotttalk.Session.DataReceived;
+import club.callistohouse.session.payload_core.Frame;
+import club.callistohouse.session.payload_core.RawData;
+import club.callistohouse.session.thunkstack_core.ThunkLayer;
+import club.callistohouse.session.thunkstack_core.ThunkStack;
 import club.callistohouse.utils.events.Listener;
 
 public class RavenTerminal extends ThunkLayer {

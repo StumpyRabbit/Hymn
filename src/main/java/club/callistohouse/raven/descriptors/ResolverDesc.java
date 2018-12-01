@@ -40,7 +40,7 @@ import java.io.IOException;
 import java.math.BigInteger;
 
 import club.callistohouse.raven.handlers.FarHandler;
-import club.callistohouse.raven.resolvers.ResolverProxy;
+import club.callistohouse.raven.resolvers.ResolverTrampoline;
 import club.callistohouse.raven.scope.Scope;
 
 
@@ -58,6 +58,6 @@ public class ResolverDesc extends WiredObjectDesc {
 	public Object getEventualFromScope(Scope scope) throws IOException {
 		FarHandler handler = new FarHandler(scope, getWireId(), swissHash);
 		scope.registerImportAtWirePosition(handler.resolver, handler.wireId);
-		return new ResolverProxy(handler.resolver.getProxy());
+		return new ResolverTrampoline(handler.resolver.getProxy());
 	}
 }

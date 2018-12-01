@@ -37,13 +37,13 @@
 package club.callistohouse.raven.refs;
 
 import club.callistohouse.raven.handlers.RemoteHandler;
-import club.callistohouse.raven.resolvers.ProxyResolver;
+import club.callistohouse.raven.resolvers.ResolverReactor;
 
 
 
 public class FarRefImpl extends ProxyRefImpl {
 
-	public FarRefImpl(RemoteHandler handler, ProxyResolver resolver) {
+	public FarRefImpl(RemoteHandler handler, ResolverReactor resolver) {
 		super(handler, resolver);
 	}
 

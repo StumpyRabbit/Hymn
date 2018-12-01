@@ -48,7 +48,7 @@ import club.callistohouse.utils.Pair;
 public class DelayedRedirector extends Redirector {
 	private static final long serialVersionUID = -1158537689908300949L;
 
-	public DelayedRedirector(ProxyResolver resolver) {
+	public DelayedRedirector(ResolverReactor resolver) {
 		super(resolver);
 	}
 
@@ -80,7 +80,7 @@ public class DelayedRedirector extends Redirector {
 		}
 
 		Pair<PromiseRefImpl, Resolver> pair = RefUtil.promise(ref.getVat());
-		Redirector redirector = new Redirector((ProxyResolver) pair.second());
+		Redirector redirector = new Redirector((ResolverReactor) pair.second());
 		resolver.getProxy().whenResolved(redirector);
 		resolver.resolve(pair.first());
 		resolver = null;

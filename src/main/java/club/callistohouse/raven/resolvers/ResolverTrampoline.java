@@ -40,10 +40,10 @@ import club.callistohouse.raven.Ref;
 import club.callistohouse.raven.exceptions.NotResolvedException;
 
 
-public class ResolverProxy implements Resolver {
+public class ResolverTrampoline implements Resolver {
 	private Ref resolverRef;
 
-	public ResolverProxy(Ref ref) {
+	public ResolverTrampoline(Ref ref) {
 		this.resolverRef = ref;
 	}
 

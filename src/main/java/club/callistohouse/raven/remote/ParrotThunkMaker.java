@@ -1,8 +1,8 @@
-package club.callistohouse.raven.core;
+package club.callistohouse.raven.remote;
 
-import club.callistohouse.raven.remote.ParrotTransform;
-import club.callistohouse.session.EncoderThunkMaker;
-import club.callistohouse.session.SessionIdentity;
+import club.callistohouse.raven.core.RavenServer;
+import club.callistohouse.session.parrotttalk.EncoderThunkMaker;
+import club.callistohouse.session.parrotttalk.SessionIdentity;
 
 public class ParrotThunkMaker extends EncoderThunkMaker {
 

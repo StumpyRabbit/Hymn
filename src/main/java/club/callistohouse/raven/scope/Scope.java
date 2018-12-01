@@ -62,14 +62,14 @@ import club.callistohouse.raven.refs.ProxyRefImpl;
 import club.callistohouse.raven.refs.RefImpl;
 import club.callistohouse.raven.refs.RefUtil;
 import club.callistohouse.raven.remote.RavenMessage;
-import club.callistohouse.raven.resolvers.ProxyResolver;
+import club.callistohouse.raven.resolvers.ResolverReactor;
 import club.callistohouse.raven.tables.ClientTable;
 import club.callistohouse.raven.tables.ProviderTable;
 import club.callistohouse.raven.tables.SwissTable;
 import club.callistohouse.raven.vat.MessageSend;
 import club.callistohouse.raven.vat.Vat;
 import club.callistohouse.raven.vat.Vine;
-import club.callistohouse.session.SessionIdentity;
+import club.callistohouse.session.parrotttalk.SessionIdentity;
 import club.callistohouse.utils.Base64Encoder;
 
 public class Scope {
@@ -223,7 +223,7 @@ public class Scope {
 		BigInteger num = Base64Encoder.toBase64(base);
 		BigInteger hash = Base64Encoder.toBase64(num);
 		FarHandler handler = new FarHandler(this, wirePosition, hash);
-		ProxyResolver resolver = handler.resolver;
+		ResolverReactor resolver = handler.resolver;
 		Integer redirectorPosition = registerQuestion(resolver);
 		handler.wireId = redirectorPosition;
 		promise.whenMoreResolved(resolver);
@@ -270,7 +270,7 @@ public class Scope {
 
 	public RemotePromiseHandler makeQuestion() throws IOException { 
 		RemotePromiseHandler handler = new RemotePromiseHandler(this);
-		ProxyResolver resolver = handler.resolver;
+		ResolverReactor resolver = handler.resolver;
 		Integer id = registerQuestion(resolver);
 		handler.wireId = id;
 		return handler;
@@ -294,10 +294,10 @@ public class Scope {
 	public void registerAnswerAtWirePosition(Ref object, Integer wirePosition) throws IOException { answers.put(wirePosition, object); }
 
 	public void deregisterQuestionWirePosition(int wirePosition) { if (questions.size() > 0) questions.decrement(wirePosition, 1); }
-	public int registerQuestion(ProxyResolver resolver) throws IOException { return questions.bind(resolver); }
+	public int registerQuestion(ResolverReactor resolver) throws IOException { return questions.bind(resolver); }
 
-	public ProxyResolver importAt(Integer wireId) throws IOException { return (ProxyResolver) imports.get(wireId); }
-	public void registerImportAtWirePosition(ProxyResolver resolver, Integer wirePosition) throws IOException { imports.put(wirePosition, resolver); }
+	public ResolverReactor importAt(Integer wireId) throws IOException { return (ResolverReactor) imports.get(wireId); }
+	public void registerImportAtWirePosition(ResolverReactor resolver, Integer wirePosition) throws IOException { imports.put(wirePosition, resolver); }
 
 	public void smash() throws RuntimeException {
 		try {
