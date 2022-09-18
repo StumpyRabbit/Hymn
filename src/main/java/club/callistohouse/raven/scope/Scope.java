@@ -69,7 +69,7 @@ import club.callistohouse.raven.tables.SwissTable;
 import club.callistohouse.raven.vat.MessageSend;
 import club.callistohouse.raven.vat.Vat;
 import club.callistohouse.raven.vat.Vine;
-import club.callistohouse.session.parrotttalk.SessionIdentity;
+import club.callistohouse.session.SessionIdentity;
 import club.callistohouse.utils.Base64Encoder;
 
 public class Scope {

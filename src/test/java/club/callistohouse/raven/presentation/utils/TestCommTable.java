@@ -34,7 +34,7 @@
  *         Tyler Close 
  *         Kevin Reid
  *******************************************************************************/
-package club.callistohouse.raven.presentation.lib.tables;
+package club.callistohouse.raven.presentation.utils;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

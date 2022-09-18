@@ -42,9 +42,6 @@ import club.callistohouse.raven.ReactorInterface;
 import club.callistohouse.raven.Ref;
 import club.callistohouse.raven.exceptions.NotResolvedException;
 import club.callistohouse.raven.handlers.RemotePromiseHandler;
-import club.callistohouse.raven.refs.RefUtil;
-import club.callistohouse.raven.resolvers.Redirector;
-import club.callistohouse.raven.resolvers.RedirectorProxy;
 import club.callistohouse.raven.scope.Scope;
 
 

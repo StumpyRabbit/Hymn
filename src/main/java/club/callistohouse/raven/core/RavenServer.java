@@ -49,17 +49,17 @@ import club.callistohouse.raven.scope.Sealer;
 import club.callistohouse.raven.scope.Unsealer;
 import club.callistohouse.raven.tables.SwissTable;
 import club.callistohouse.raven.vat.Vat;
-import club.callistohouse.session.parrotttalk.CipherThunkMaker;
-import club.callistohouse.session.parrotttalk.Session;
-import club.callistohouse.session.parrotttalk.SessionAgent;
-import club.callistohouse.session.parrotttalk.SessionAgentMap;
-import club.callistohouse.session.parrotttalk.SessionIdentity;
-import club.callistohouse.session.parrotttalk.Session.Connected;
-import club.callistohouse.session.parrotttalk.Session.Disconnected;
-import club.callistohouse.session.parrotttalk.Session.Identified;
-import club.callistohouse.session.parrotttalk.SessionAgent.Started;
-import club.callistohouse.session.parrotttalk.SessionAgent.Stopped;
-import club.callistohouse.session.thunkstack_core.ThunkStack;
+import club.callistohouse.session.CipherThunkMaker;
+import club.callistohouse.session.Session;
+import club.callistohouse.session.Session.Connected;
+import club.callistohouse.session.Session.Disconnected;
+import club.callistohouse.session.Session.Identified;
+import club.callistohouse.session.SessionAgent;
+import club.callistohouse.session.SessionAgent.Started;
+import club.callistohouse.session.SessionAgent.Stopped;
+import club.callistohouse.session.SessionAgentMap;
+import club.callistohouse.session.SessionIdentity;
+import club.callistohouse.session.protocol.ThunkStack;
 import club.callistohouse.utils.MapUtil;
 import club.callistohouse.utils.Pair;
 import club.callistohouse.utils.events.Listener;
@@ -84,7 +84,9 @@ public class RavenServer {
 	}
 
 	private SessionAgentMap buildSessionAgentMap() {
-		return new SessionAgentMap(new CipherThunkMaker("AESede", "AES/CBC/PKCS5Padding", 32, 16, true), new ParrotThunkMaker(this));
+		return new SessionAgentMap(
+				new CipherThunkMaker("AESede", "AES/CBC/PKCS5Padding", 32, 16, true), 
+				new ParrotThunkMaker(this));
 	}
 
 	public Scope getScopeForFarKey(SessionIdentity farKey) {

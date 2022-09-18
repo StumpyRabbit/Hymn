@@ -43,7 +43,7 @@ import club.callistohouse.raven.Ref;
 import club.callistohouse.raven.exceptions.NotResolvedException;
 import club.callistohouse.raven.scope.Scope;
 import club.callistohouse.raven.vat.Vine;
-import club.callistohouse.session.parrotttalk.SessionIdentity;
+import club.callistohouse.session.SessionIdentity;
 
 public class Promise3Desc extends ObjectRefDesc {
 	private static final long serialVersionUID = 6883656806105142634L;

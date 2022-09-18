@@ -65,7 +65,7 @@ import club.callistohouse.raven.remote.RavenInputStream;
 import club.callistohouse.raven.remote.RavenOutputStream;
 import club.callistohouse.raven.scope.Scope;
 import club.callistohouse.raven.tables.SwissTable;
-import club.callistohouse.session.parrotttalk.SessionIdentity;
+import club.callistohouse.session.SessionIdentity;
 
 public class EncodingTests {
 

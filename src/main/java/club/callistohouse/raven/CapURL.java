@@ -39,7 +39,7 @@ package club.callistohouse.raven;
 import java.math.BigInteger;
 import java.net.InetSocketAddress;
 
-import club.callistohouse.session.parrotttalk.SessionIdentity;
+import club.callistohouse.session.SessionIdentity;
 
 public class CapURL {
 

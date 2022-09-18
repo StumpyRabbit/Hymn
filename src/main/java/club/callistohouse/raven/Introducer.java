@@ -50,7 +50,7 @@ import club.callistohouse.raven.core.RavenServer;
 import club.callistohouse.raven.exceptions.NotResolvedException;
 import club.callistohouse.raven.scope.Locator;
 import club.callistohouse.raven.tables.SwissTable;
-import club.callistohouse.session.parrotttalk.SessionIdentity;
+import club.callistohouse.session.SessionIdentity;
 
 public class Introducer {
 

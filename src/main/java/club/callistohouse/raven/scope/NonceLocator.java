@@ -44,7 +44,7 @@ import club.callistohouse.raven.exceptions.NotResolvedException;
 import club.callistohouse.raven.tables.NearGiftTable;
 import club.callistohouse.raven.tables.PromiseGiftTable;
 import club.callistohouse.raven.tables.SwissTable;
-import club.callistohouse.session.parrotttalk.SessionIdentity;
+import club.callistohouse.session.SessionIdentity;
 
 public class NonceLocator {
 
